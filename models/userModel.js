@@ -13,9 +13,9 @@ const schema = new mongoose.Schema(
 		},
 		password: { type: String, required: true, minlength: 8, maxlength: 1024 },
 		phone: { type: String },
-		reviews: { type: Number, required: true, detault: 0 },
-		badges: { type: Number, required: true, detault: 0 },
-		points: { type: Number, required: true, detault: 0 },
+		reviews: { type: Number, detault: 0 },
+		badges: { type: Number, detault: 0 },
+		points: { type: Number, detault: 0 },
 	},
 	{
 		timestamps: true,
