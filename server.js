@@ -11,6 +11,7 @@ import ratingRoute from './routes/ratingRoute.js';
 import activitiesRoute from './routes/activitiesRoute.js';
 import searchRoute from './routes/searchRoute.js';
 import filterRoute from './routes/filterRoute.js';
+import commentsRoute from './routes/commentsRoute.js';
 
 //upload route
 import uploadRoute from './routes/uploadRoute.js';
@@ -44,6 +45,7 @@ app.use('/api/auth', authRoute);
 //listing route
 app.use('/api/listings', listingRoute);
 app.use('/api/ratings', ratingRoute);
+app.use('/api/comments', commentsRoute);
 app.use('/api/categories', categoriesRoute);
 app.use('/api/activities', activitiesRoute);
 app.use('/api/search', searchRoute);
