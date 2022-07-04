@@ -21,6 +21,7 @@ import adminUserRoute from './admin-routes/users/adminUserRoute.js';
 import adminCategoryRoute from './admin-routes/categories/adminCategoryRoute.js';
 import adminListingsRoute from './admin-routes/listings/adminListingsRoute.js';
 import adminRatingsRoute from './admin-routes/listings/adminRatingsRoute.js';
+import adminBadgesRoute from './admin-routes/badges/adminBadgesRoute.js';
 
 const app = express();
 app.use(express.json());
@@ -38,6 +39,7 @@ app.use('/admin/users', adminUserRoute);
 app.use('/admin/categories', adminCategoryRoute);
 app.use('/admin/listings', adminListingsRoute);
 app.use('/admin/ratings', adminRatingsRoute);
+app.use('/admin/badges', adminBadgesRoute);
 
 //route for user login & registration
 app.use('/api/auth', authRoute);

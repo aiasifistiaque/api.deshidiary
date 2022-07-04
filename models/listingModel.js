@@ -59,6 +59,11 @@ const schema = mongoose.Schema(
 		fourStar: { type: Number, required: true, default: 0 },
 		fiveStar: { type: Number, required: true, default: 0 },
 
+		geoLocation: {
+			lat: { type: Number, required: true },
+			lng: { type: Number, required: true },
+		},
+
 		note: {
 			type: String,
 			trim: true,

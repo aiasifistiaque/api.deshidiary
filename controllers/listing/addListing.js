@@ -21,6 +21,8 @@ const addListing = asyncHandler(async (req, res) => {
 		paymentOptions,
 		tags,
 		images,
+		lat,
+		lng,
 	} = req.body;
 	try {
 		const item = await Listing({
@@ -44,6 +46,10 @@ const addListing = asyncHandler(async (req, res) => {
 			images,
 			rating: 0,
 			reviews: 0,
+			geoLocation: {
+				lat,
+				lng,
+			},
 		});
 		const saved = await item.save();
 		if (saved) {
