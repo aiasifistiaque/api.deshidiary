@@ -4,6 +4,7 @@ import _ from 'lodash';
 import Joi from 'joi';
 import bcrypt from 'bcrypt';
 import { protect } from '../middleware/auth.js';
+import Rating from '../models/ratingModel.js';
 
 const router = express.Router();
 
@@ -73,7 +74,10 @@ router.post('/register', async (req, res) => {
 
 router.get('/self', protect, async (req, res) => {
 	try {
-		const data = await User.findById(req.user._id).select('-password');
+		let data = await User.findById(req.user._id).select('-password');
+		const reviews = await Rating.count({ user: req.user._id });
+		data.reviews = reviews;
+
 		res.status(200).json(data);
 	} catch {
 		e => res.status(500).send({ message: e.message });

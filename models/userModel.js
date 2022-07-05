@@ -16,6 +16,7 @@ const schema = new mongoose.Schema(
 		reviews: { type: Number, detault: 0 },
 		badges: { type: Number, detault: 0 },
 		points: { type: Number, detault: 0 },
+		viewer: String,
 	},
 	{
 		timestamps: true,
