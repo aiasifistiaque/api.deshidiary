@@ -24,7 +24,17 @@ const getAllUsers = async (req, res) => {
 	}
 };
 
+const getUserById = async (req, res) => {
+	try {
+		const data = await User.findById(req.params.id).select('-password');
+		return res.status(200).json(data);
+	} catch (e) {
+		return res.status(500).json({ message: e.message });
+	}
+};
+
 const router = express.Router();
 router.get('/', protect, admin, sort, getAllUsers);
+router.get('/:id', protect, admin, getUserById);
 
 export default router;

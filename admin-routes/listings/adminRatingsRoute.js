@@ -14,7 +14,7 @@ const getAdminRatings = async (req, res) => {
 				{ path: 'listing', select: 'name rating reviews' },
 				{ path: 'user', select: 'name image' },
 			]);
-		const count = await Rating.count({ listing: req.params.id });
+		const count = await Rating.count();
 
 		req.meta.docsInPage = data.length;
 		req.meta.totalDocs = count;
