@@ -37,10 +37,12 @@ const filteredSearch = async (req, res) => {
 			.select('name images category tags city division street rating reviews')
 			.populate('category');
 
+		const count = await Listing.count(query);
+
 		req.meta.docsInPage = data.length;
 		req.meta.query = query;
-		// req.meta.totalDocs = count;
-		// req.meta.totalPages = Math.ceil(count / perpage);
+		req.meta.totalDocs = count;
+		req.meta.totalPages = Math.ceil(count / perpage);
 
 		return res.status(200).json({ ...req.meta, doc: data });
 	} catch (e) {

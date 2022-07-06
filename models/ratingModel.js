@@ -22,6 +22,7 @@ const schema = mongoose.Schema(
 			type: String,
 			required: true,
 		},
+		comments: { type: Number, default: 0 },
 		date: {
 			type: String,
 		},

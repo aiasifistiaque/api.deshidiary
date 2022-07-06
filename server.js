@@ -13,6 +13,7 @@ import searchRoute from './routes/searchRoute.js';
 import filterRoute from './routes/filterRoute.js';
 import commentsRoute from './routes/commentsRoute.js';
 import userRoute from './routes/userRoute.js';
+import notificationsRoute from './routes/notificationsRoute.js';
 
 //upload route
 import uploadRoute from './routes/uploadRoute.js';
@@ -54,6 +55,7 @@ app.use('/api/activities', activitiesRoute);
 app.use('/api/search', searchRoute);
 app.use('/api/filter', filterRoute);
 app.use('/api/users', userRoute);
+app.use('/api/notifications', notificationsRoute);
 
 const port = process.env.PORT || 5000;
 
