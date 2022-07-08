@@ -1,8 +1,6 @@
 import express from 'express';
 import { admin, protect } from '../../middleware/auth.js';
 import { sort } from '../../middleware/sort.js';
-import Category from '../../models/categoriesModel.js';
-import Joi from 'joi';
 import Badge from '../../models/badgesModel.js';
 
 const addBadges = async (req, res) => {

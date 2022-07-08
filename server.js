@@ -14,6 +14,7 @@ import filterRoute from './routes/filterRoute.js';
 import commentsRoute from './routes/commentsRoute.js';
 import userRoute from './routes/userRoute.js';
 import notificationsRoute from './routes/notificationsRoute.js';
+import badgesRoute from './routes/badgesRoute.js';
 
 //upload route
 import uploadRoute from './routes/uploadRoute.js';
@@ -24,6 +25,7 @@ import adminCategoryRoute from './admin-routes/categories/adminCategoryRoute.js'
 import adminListingsRoute from './admin-routes/listings/adminListingsRoute.js';
 import adminRatingsRoute from './admin-routes/listings/adminRatingsRoute.js';
 import adminBadgesRoute from './admin-routes/badges/adminBadgesRoute.js';
+import adminAssignBadges from './admin-routes/badges/assignBadgesRoute.js';
 
 const app = express();
 app.use(express.json());
@@ -42,6 +44,7 @@ app.use('/admin/categories', adminCategoryRoute);
 app.use('/admin/listings', adminListingsRoute);
 app.use('/admin/ratings', adminRatingsRoute);
 app.use('/admin/badges', adminBadgesRoute);
+app.use('/admin/assign', adminAssignBadges);
 
 //route for user login & registration
 app.use('/api/auth', authRoute);
@@ -56,6 +59,7 @@ app.use('/api/search', searchRoute);
 app.use('/api/filter', filterRoute);
 app.use('/api/users', userRoute);
 app.use('/api/notifications', notificationsRoute);
+app.use('/api/badges', badgesRoute);
 
 const port = process.env.PORT || 5000;
 

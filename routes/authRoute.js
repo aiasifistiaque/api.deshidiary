@@ -5,6 +5,7 @@ import Joi from 'joi';
 import bcrypt from 'bcrypt';
 import { protect } from '../middleware/auth.js';
 import Rating from '../models/ratingModel.js';
+import Assign from '../models/assignModel.js';
 
 const router = express.Router();
 
@@ -76,7 +77,10 @@ router.get('/self', protect, async (req, res) => {
 	try {
 		let data = await User.findById(req.user._id).select('-password');
 		const reviews = await Rating.count({ user: req.user._id });
+		const badges = await Assign.count({ user: req.user._id });
+
 		data.reviews = reviews;
+		data.badges = badges;
 
 		res.status(200).json(data);
 	} catch {
