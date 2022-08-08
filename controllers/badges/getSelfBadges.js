@@ -5,7 +5,7 @@ const getSelfBadges = async (req, res) => {
 		const data = await Assign.find({ user: req.user._id }).populate([
 			{
 				path: 'user',
-				select: 'name email',
+				select: 'name email image',
 			},
 			{
 				path: 'badge',

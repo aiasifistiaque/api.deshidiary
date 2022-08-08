@@ -11,11 +11,17 @@ const schema = new mongoose.Schema(
 			trim: true,
 			default: 'user',
 		},
+		image: { type: String },
 		password: { type: String, required: true, minlength: 8, maxlength: 1024 },
 		phone: { type: String },
 		reviews: { type: Number, detault: 0 },
-		badges: { type: Number, detault: 0 },
+		listings: { type: Number, detault: 0 },
+		photo: { type: Number, detault: 0 },
 		points: { type: Number, detault: 0 },
+		level: { type: Number, detault: 0 },
+
+		badges: { type: Number, detault: 0 },
+
 		viewer: String,
 	},
 	{

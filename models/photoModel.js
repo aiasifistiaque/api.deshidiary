@@ -12,25 +12,17 @@ const schema = mongoose.Schema(
 			required: true,
 			ref: 'Listing',
 		},
-		rating: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Rating',
-		},
-		photo: { type: mongoose.Schema.Types.ObjectId, ref: 'Photo' },
-		type: {
+
+		image: {
 			type: String,
 			required: true,
 		},
-
-		text: { type: String, required: true },
-
-		images: [],
 	},
 	{
 		timestamps: true,
 	}
 );
 
-const Activity = mongoose.model('Activity', schema);
+const Photo = mongoose.model('Photo', schema);
 
-export default Activity;
+export default Photo;

@@ -1,7 +1,7 @@
-import express from 'express';
 import listingSearch from '../controllers/search/listingSearch.js';
 import topSearch from '../controllers/search/topSearch.js';
 import { sort } from '../middleware/sort.js';
+import express from 'express';
 
 const router = express.Router();
 

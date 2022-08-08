@@ -7,7 +7,7 @@ const getAssignedBadges = async (req, res) => {
 		const data = await Assign.find({ user: query }).populate([
 			{
 				path: 'user',
-				select: 'name email',
+				select: 'name email image',
 			},
 			{
 				path: 'badge',

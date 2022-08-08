@@ -6,6 +6,8 @@ import bcrypt from 'bcrypt';
 import { protect } from '../middleware/auth.js';
 import Rating from '../models/ratingModel.js';
 import Assign from '../models/assignModel.js';
+import Listing from '../models/listingModel.js';
+import Photo from '../models/photoModel.js';
 
 const router = express.Router();
 
@@ -73,14 +75,46 @@ router.post('/register', async (req, res) => {
 	}
 });
 
+router.post('/update', protect, async (req, res) => {
+	const { image, name, phone, description } = req.body;
+	console.log(req.body);
+
+	try {
+		const data = await User.findById(req.user._id);
+		if (image) data.image = image;
+		if (name) data.name = name;
+		if (phone) data.phone = phone;
+		if (description) data.description = description;
+		const saved = await data.save();
+
+		return res.status(200).json(saved);
+	} catch (e) {
+		res.status(500).send({ message: e.message });
+	}
+});
+
 router.get('/self', protect, async (req, res) => {
 	try {
 		let data = await User.findById(req.user._id).select('-password');
-		const reviews = await Rating.count({ user: req.user._id });
+		// const reviews = await Rating.count({ user: req.user._id });
+		// const badges = await Assign.count({ user: req.user._id });
+
 		const badges = await Assign.count({ user: req.user._id });
 
-		data.reviews = reviews;
+		const reviews = await Rating.count({ user: req.user._id });
+		const listings = await Listing.count({ user: req.user._id });
+		const photos = await Photo.count({ user: req.user._id });
+
+		data.reviews = reviews ? reviews : 0;
+		data.listings = listings ? listings : 0;
+		data.photo = photos ? photos : 0;
+
+		data.points = reviews + listings + photos;
+
 		data.badges = badges;
+		//data.viewer = data._id != req.user._id ? req.user._id : 'self';
+
+		await data.save();
 
 		res.status(200).json(data);
 	} catch {

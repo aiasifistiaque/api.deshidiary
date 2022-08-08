@@ -9,7 +9,7 @@ const getActivities = async (req, res) => {
 			.limit(perpage)
 			.skip(skip)
 			.populate([
-				{ path: 'user', select: 'name' },
+				{ path: 'user', select: 'name image' },
 				{ path: 'listing', select: 'name images' },
 				{ path: 'rating' },
 			]);

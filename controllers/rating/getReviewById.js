@@ -3,8 +3,7 @@ import Rating from '../../models/ratingModel.js';
 
 const getReviewById = asyncHandler(async (req, res) => {
 	try {
-		const data = await Rating.findById(req.params.id)
-		.populate([
+		const data = await Rating.findById(req.params.id).populate([
 			{ path: 'listing', select: 'name rating reviews images' },
 			{ path: 'user', select: 'name image' },
 		]);
