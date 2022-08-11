@@ -1,4 +1,5 @@
 import express from 'express';
+import seedUserPoints from '../../controllers/user/seedUserPoints.js';
 import { admin, protect } from '../../middleware/auth.js';
 import { sort } from '../../middleware/sort.js';
 import User from '../../models/userModel.js';
@@ -36,5 +37,6 @@ const getUserById = async (req, res) => {
 const router = express.Router();
 router.get('/', protect, admin, sort, getAllUsers);
 router.get('/:id', protect, admin, getUserById);
+router.post('/seed', protect, admin, seedUserPoints);
 
 export default router;
