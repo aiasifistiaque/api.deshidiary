@@ -26,6 +26,7 @@ import adminListingsRoute from './admin-routes/listings/adminListingsRoute.js';
 import adminRatingsRoute from './admin-routes/listings/adminRatingsRoute.js';
 import adminBadgesRoute from './admin-routes/badges/adminBadgesRoute.js';
 import adminAssignBadges from './admin-routes/badges/assignBadgesRoute.js';
+import adminKpiRoute from './admin-routes/kpi/adminKpiRoute.js';
 
 const app = express();
 app.use(express.json());
@@ -45,6 +46,7 @@ app.use('/admin/listings', adminListingsRoute);
 app.use('/admin/ratings', adminRatingsRoute);
 app.use('/admin/badges', adminBadgesRoute);
 app.use('/admin/assign', adminAssignBadges);
+app.use('/admin/kpi', adminKpiRoute);
 
 //route for user login & registration
 app.use('/api/auth', authRoute);

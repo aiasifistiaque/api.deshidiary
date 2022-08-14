@@ -37,6 +37,27 @@ function validate(data) {
 	return schema.validate(data);
 }
 
+const editCategory = async (req, res) => {
+	const { name, description, image, id } = req.body;
+
+	// const { error } = validate(req.body);
+	// if (error) return res.status(400).send({ message: error.details[0].message });
+
+	try {
+		const exists = await Category.findById(id);
+		if (!exists)
+			return res.status(400).send({ message: 'Category Does Not Exist' });
+
+		exists.image = image;
+		exists.name = name;
+
+		const saved = await exists.save();
+		return res.status(200).json(saved);
+	} catch (e) {
+		return res.status(500).json({ message: e.message });
+	}
+};
+
 const getAllCategories = async (req, res) => {
 	const { sort, page, perpage, skip } = req.meta;
 
@@ -57,5 +78,6 @@ const getAllCategories = async (req, res) => {
 const router = express.Router();
 router.get('/', protect, admin, sort, getAllCategories);
 router.post('/', protect, admin, addCategory);
+router.put('/', protect, admin, editCategory);
 
 export default router;
