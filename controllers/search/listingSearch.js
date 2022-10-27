@@ -8,20 +8,20 @@ const listingSearch = async (req, res) => {
 			? {
 					$or: [
 						{ name: { $regex: req.params.search, $options: 'i' } },
-						{ tags: { $in: [req.params.search] } },
+						{ tags: { $in: [req.params.search.toLowerCase()] } },
 					],
 			  }
 			: {
 					$or: [
 						{ name: { $regex: req.params.search, $options: 'i' } },
-						{ tags: { $in: [req.params.search] } },
+						{ tags: { $in: [req.params.search.toLowerCase()] } },
 					],
 					division: req.query.location || 'Dhaka',
 			  }
 		: {
 				$or: [
 					{ name: { $regex: req.params.search, $options: 'i' } },
-					{ tags: { $in: [req.params.search] } },
+					{ tags: { $in: [req.params.search.toLowerCase()] } },
 				],
 		  };
 
