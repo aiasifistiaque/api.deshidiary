@@ -93,6 +93,21 @@ router.post('/update', protect, async (req, res) => {
 	}
 });
 
+router.post('/first-order', protect, async (req, res) => {
+	try {
+		const data = await User.findById(req.user._id);
+		if (image) data.image = image;
+		if (name) data.name = name;
+		if (phone) data.phone = phone;
+		if (description) data.description = description;
+		const saved = await data.save();
+
+		return res.status(200).json(saved);
+	} catch (e) {
+		res.status(500).send({ message: e.message });
+	}
+});
+
 router.get('/self', protect, async (req, res) => {
 	try {
 		let data = await User.findById(req.user._id).select('-password');

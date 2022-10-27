@@ -4,6 +4,8 @@ const filteredSearch = async (req, res) => {
 	const { sort, page, perpage, skip } = req.meta;
 	const { search, category, location, rating } = req.query;
 
+	console.log(req.query);
+
 	const query = {
 		...(search &&
 			search != 'undefined' && {

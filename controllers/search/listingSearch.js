@@ -5,12 +5,25 @@ const listingSearch = async (req, res) => {
 
 	const query = req.query.location
 		? req.query.location == 'All'
-			? { name: { $regex: req.params.search, $options: 'i' } }
+			? {
+					$or: [
+						{ name: { $regex: req.params.search, $options: 'i' } },
+						{ tags: { $in: [req.params.search] } },
+					],
+			  }
 			: {
-					name: { $regex: req.params.search, $options: 'i' },
+					$or: [
+						{ name: { $regex: req.params.search, $options: 'i' } },
+						{ tags: { $in: [req.params.search] } },
+					],
 					division: req.query.location || 'Dhaka',
 			  }
-		: { name: { $regex: req.params.search, $options: 'i' } };
+		: {
+				$or: [
+					{ name: { $regex: req.params.search, $options: 'i' } },
+					{ tags: { $in: [req.params.search] } },
+				],
+		  };
 
 	try {
 		const data = await Listing.find(query)
@@ -21,8 +34,6 @@ const listingSearch = async (req, res) => {
 			.populate('category');
 
 		req.meta.docsInPage = data.length;
-		// req.meta.totalDocs = count;
-		// req.meta.totalPages = Math.ceil(count / perpage);
 
 		return res.status(200).json({ ...req.meta, doc: data });
 	} catch (e) {
