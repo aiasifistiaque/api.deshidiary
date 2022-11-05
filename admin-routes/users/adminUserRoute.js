@@ -58,10 +58,32 @@ const searchUsers = async (req, res) => {
 	}
 };
 
+const makeAdmin = async (req, res) => {
+	const { id, role } = req.body;
+	try {
+		const data = await User.findById(id).select('-password');
+
+		if (!data) {
+			return res.status(404).json({ message: 'User does not exist' });
+		}
+
+		if (req.body.role) {
+			data.role = role;
+		}
+
+		const saved = await data.save();
+
+		return res.status(200).json(saved);
+	} catch (e) {
+		return res.status(500).json({ message: e.message });
+	}
+};
+
 const router = express.Router();
 router.get('/', protect, admin, sort, getAllUsers);
 router.get('/:id', protect, admin, getUserById);
 router.post('/seed', protect, admin, seedUserPoints);
 router.get('/search/:id', protect, admin, sort, searchUsers);
+router.post('/edit/makeadmin', protect, admin, makeAdmin);
 
 export default router;
